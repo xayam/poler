@@ -1,7 +1,5 @@
 chess
 numpy
-keras
-matplotlib
 tensorflow
 Pyinstaller
 torch==2.5.0

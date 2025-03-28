@@ -1,5 +1,6 @@
 .github
 venv
+.venv
 .idea
 .run
 __pycache__
