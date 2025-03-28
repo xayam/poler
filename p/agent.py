@@ -44,7 +44,7 @@ class ChessAgent:
             if diff < min_diff:
                 min_diff = diff
                 best_move = move
-        return best_move
+        return best_move 
 
     def model_save(self):
         torch.save(self.model.state_dict(), self.file_model)
