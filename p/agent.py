@@ -44,7 +44,7 @@ class ChessAgent:
             if diff < min_diff:
                 min_diff = diff
                 best_move = move
-        return best_move 
+        return best_move
 
     def model_save(self):
         torch.save(self.model.state_dict(), self.file_model)
@@ -77,11 +77,13 @@ class ChessEngineAgent(ChessAgent):
         result = self.sf.analyse(
             board,
             chess.engine.Limit(depth=depth),
+
             # options={
             #     "Skill level": 0,
             #     "UCI_Elo": skill_level,
             #     "UCI_LimitStrength": True,
             # },
+
             multipv=255,
         )
         if best:
