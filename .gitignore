@@ -1,0 +1,10 @@
+.github
+venv
+.idea
+.run
+__pycache__
+build
+dist
+bin
+*.pth
+*.exe
