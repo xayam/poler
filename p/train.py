@@ -94,6 +94,8 @@ class Train:
                           f"i={i}, c={count}, "
                           f"{losses1 / (episode + 1)} | "
                           f"{losses2 / (episode + 1)} | {results}")
+                white_agent.sf.close()
+                black_agent.sf.close()
                 del white_agent
                 del black_agent
 
