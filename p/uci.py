@@ -4,7 +4,7 @@ import chess
 import torch
 
 from p.agent import ChessAgent
-from p.enviroment import Enviroment
+from p.environment import Environment
 
 
 class UCI:
@@ -15,7 +15,7 @@ class UCI:
         self.game_data = []
         self.white_agent = ChessAgent(True)
         self.black_agent = ChessAgent(False)
-        self.enviroment = Enviroment()
+        self.enviroment = Environment()
         self.process_command("position moves")
 
     def output(self, s) -> None:

@@ -8,22 +8,22 @@ import torch
 from torch import optim
 
 from p.model import Model
-from p.enviroment import Enviroment
+from p.environment import Environment
 
 
 class ChessAgent:
     def __init__(self, is_white=True, model=True):
         self.memory = []
         self.file_model = None
-        self.enviroment = Enviroment()
+        self.environment = Environment()
         self.is_white = is_white
         self.model = None
         self.optimizer = None
         if model:
             self.file_model = \
-                self.enviroment.white_model_name \
+                self.environment.white_model_name \
                     if self.is_white \
-                    else self.enviroment.black_model_name
+                    else self.environment.black_model_name
             self.model = Model()
             self.optimizer = optim.Adam(self.model.parameters())
             self.model_load()
@@ -39,7 +39,7 @@ class ChessAgent:
         for move in board.legal_moves:
             temp_board = board.copy()
             temp_board.push(move)
-            new_tensor = self.enviroment.board_to_tensor(temp_board)
+            new_tensor = self.environment.board_to_tensor(temp_board)
             diff = torch.mean((predicted_pos - new_tensor) ** 2)
             if diff < min_diff:
                 min_diff = diff
@@ -70,7 +70,7 @@ class ChessRandomAgent(ChessAgent):
 class ChessEngineAgent(ChessAgent):
     def __init__(self, is_white=True, model=False):
         ChessAgent.__init__(self, is_white, model)
-        self.engine_stockfish = self.enviroment.engine_stockfish
+        self.engine_stockfish = self.environment.engine_stockfish
         self.sf = chess.engine.SimpleEngine.popen_uci(self.engine_stockfish)
 
     def get_move(self, board, best=True, shift=1, depth=10, skill_level=0):

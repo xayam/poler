@@ -3,12 +3,12 @@ import torch
 import chess
 
 from p.agent import ChessAgent, ChessRandomAgent, ChessEngineAgent
-from p.enviroment import Enviroment
+from p.environment import Environment
 
 
 class Train:
     def __init__(self):
-        self.enviroment = Enviroment()
+        self.enviroment = Environment()
 
     def train_step(self, agent, states, rewards):
         if agent.model is None:
@@ -94,8 +94,10 @@ class Train:
                           f"i={i}, c={count}, "
                           f"{losses1 / (episode + 1)} | "
                           f"{losses2 / (episode + 1)} | {results}")
-                white_agent.sf.close()
-                black_agent.sf.close()
+                if isinstance(white_agent, ChessEngineAgent):
+                    white_agent.sf.close()
+                if isinstance(black_agent, ChessEngineAgent):
+                    black_agent.sf.close()
                 del white_agent
                 del black_agent
 
